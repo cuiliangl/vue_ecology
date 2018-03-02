@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{count}}</div>
+        <button @click='sum'>+</button>
+        <button @click='sub'>—</>
+    </div>
+</body>
+</html>
+<script src="../node_modules /vue/dist/vue.min.js"></script>
+<script src="../node_modules /vuex/dist/vuex.min.js"></script>
+<script>
+    console.log(Vuex)
+    const store = new Vuex.Store({
+        state: {
+            vuex_count: 0
+        },
+        mutations: {
+            vuex_sum(state) {
+                state.vuex_count++;
+            },
+            vuex_sub: (state) => {
+                state.vuex_count--;
+            }
+        }
+    })
+
+    console.log(store)
+    new Vue({
+        el: "#app",
+        computed: {
+            // count:function(){
+            //     return store.state.count;
+            // },
+            count() {
+                return store.state.vuex_count;
+            }
+        },
+        store,
+        methods: {
+            sum() {
+                store.commit('vuex_sum');
+            },
+            sub() {
+                store.commit('vuex_sub');
+            }
+
+        }
+
+    })
+
+
+
+</script>

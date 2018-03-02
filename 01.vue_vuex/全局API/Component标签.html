@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component :is = 'select'></component>
+        <button @click = 'selectComponet'>点击改变组件</button>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+
+<script>
+    
+    var componentA = {
+        template: '<div>组件A</div>'
+    }
+    var componentB = {
+        template: "<div>组件B</div>"
+    }
+    var componentC = {
+        template: "<div>组件C</div>"
+    }
+
+    new Vue({
+        el: "#app",
+        data: {
+            select: componentA
+        },
+        methods: {
+            selectComponet(){
+                if(this.select==componentA){
+                    this.select = componentB
+                } else if(this.select == componentB){
+                    this.select = componentC
+                } else {
+                    this.select = componentA
+                }
+            }
+        },
+        components: {
+            componentA,
+            componentB,
+            componentC
+        }
+    })
+
+
+</script>

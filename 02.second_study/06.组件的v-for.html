@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <ul>
+            <!-- 父组件通过on 使用自定义事件来接收子组件发射的事件 -->
+            <li is="todo-item"
+                v-for="(item, index) in lists"
+                :title="item.title"
+                :key="index"
+                :index="index"
+                @remove="removeItem(index)"
+            >
+
+            </li>
+        </ul>
+        <button @click="handle('hi')">点击</button>
+    </div>
+</body>
+</html>
+<script>
+
+    // 定义子组件
+    Vue.component('todo-item', {
+        template: '\
+            <li >{{title}}\
+                <button :data-index="index" @click="removeHandle">X</button>\
+            </li>',
+        props: ['title', 'index'],
+        methods: {
+            removeHandle(e) {
+                // console.log(this);
+                // 子组件通过emit发射一个事件
+                // console.log(e.target.dataset)
+                // this.$emit('remove', e.target.dataset.index)
+                // 或者
+                this.$emit('remove');
+            }
+        }
+    })
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            lists: [
+                {title: '南京'},
+                {title: '北京'},
+                {title: '天津'},
+                {title: '上海'}
+            ]
+        },
+        methods: {
+            removeItem(index) {
+                console.log(index);
+                this.lists.splice(index, 1)
+            },
+            handle(data) {
+                // console.log(event.target)
+                console.log(data + ' conso')
+                console.log(event.target)
+            }
+        }
+    })
+
+</script>

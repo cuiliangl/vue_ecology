@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .dv {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="dv" v-show = 'isShow'></div>
+        <button @click = 'btm'>点击显示与否</button>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            btm(){
+                console.log(22)
+                this.isShow = !this.isShow;
+            }
+        }
+    })
+</script>

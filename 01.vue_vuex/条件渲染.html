@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="result==0">成绩没有公布</div>
+        <div v-else-if="result>90">{{result}}:成绩优秀</div>
+        <div v-else-if="result>80">{{result}}:成绩还可以</div>
+        <div v-else-if="result>70">{{result}}:成绩不咋地</div>
+        <div v-else>{{result}}:成绩很差，回家卖红薯吧</div>
+        <button @click = 'btn'>改变成绩</button>
+    </div>
+    
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        data: {
+            result: 0
+        },
+    
+        methods: {
+            btn(){
+                
+                this.result = Math.ceil(Math.random()*100)
+            }
+        }
+    })
+</script>

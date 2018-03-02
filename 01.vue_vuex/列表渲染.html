@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <table border="1" >
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for= " (star, index) in stars">
+                    <td>{{ index+1 }}</td>
+                    <td>{{ star.name }}</td>
+                    <td>{{ star.age }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        data: {
+            stars: [
+                 {name: "刘诗诗", age: 34},
+                 {name: "刘亦菲", age: 36},
+                 {name: "林心如", age: 33},
+                 {name: "赵丽颖", age: 26},
+                 {name: "柳岩", age: 32}
+            ]
+            
+        }
+    })
+</script>

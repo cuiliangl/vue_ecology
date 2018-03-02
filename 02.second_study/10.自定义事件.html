@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 子组件中通过v-on绑定自定义事件 -->
+        <!-- 自定义 事件名 不要使用小驼峰命名法，使用短线连接 -->
+        <to-do v-on:add-handle="getCount"></to-do>
+    </div>
+</body>
+</html>
+<script>
+
+    // 定义子组件
+    Vue.component('to-do', {
+        template: `<div>
+                {{count}}
+                <button @click="addHandle">Addclick</button>
+            </div>
+        `,
+        data() {
+            return {
+                count: 2
+            }
+        },
+        methods: {
+            addHandle() {
+                this.count += 1;
+                // 触发自定义事件 addHandle， 并传递值
+                // 自定义事件名不要使用驼峰命名 使用短线连接
+                this.$emit('add-handle', this.count)
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app",
+        methods: {
+            getCount(value) {
+                console.log(value);
+            }
+        }
+    })
+
+</script>

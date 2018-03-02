@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ num }}</h2>
+        <button @click="add">点击增加</button>
+        <!--<h3>数字变成了：{{ num1 }}</h3>-->
+    </div>
+</body>
+
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    var myMixin = {
+        updated: function () {
+
+            // this.num1 = this.num
+            console.log('这是混入对象的，更新后的值是：'+this.num)
+        }
+    }
+
+    Vue.mixin({
+        updated:function(){
+            console.log('这是全局混入')
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            num: 10,
+            // num1: 10
+        },
+        methods: {
+            add() {
+                this.num++
+            }
+        },
+        //可以接收多个对象参数。对象中可以包含任意的组件选项，混入后，对象中的全部选项将混入到组件中。
+        mixins: [myMixin],
+        updated: function () {
+            console.log('这是构造器里的：'+this.num)
+        }
+    })
+
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            商品的价格是： {{ price }}，含税价格是： {{ priceIndex }}，折合人名币是： {{ priceRMB }}
+        </div>
+        <button @click='btn(2000)'>改变含税价格</button>
+    </div>
+</body>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            price: 3920
+        },
+        computed: {
+            priceIndex: {
+                get: function () {
+                    console.log(2)
+                    return Math.round(this.price * 1.08);
+                },
+                set: function (value) {
+                    console.log(1)
+                    console.log(value);// value为修改后的priceIndex值,priceIndex改变以后，首先执行set钩子函数，其次执行get钩子函数
+                    
+                    this.price = Math.round(value / 1.08);
+                }
+            },
+            priceRMB: function () {
+                return Math.round(this.priceIndex / 13);
+            }
+        },
+        methods: {
+            btn: function (value) {
+                console.log(value)
+                this.priceIndex = value;
+            }
+        },
+        watch: {
+            priceIndex: function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+            }
+        }
+    })
+
+</script>
+
+</html>

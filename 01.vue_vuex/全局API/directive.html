@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>directive自定义指令</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div v-cui="color">{{ num }}</div>
+        <button @click = "add">增加</button>
+       
+    </div>
+    <button onclick = 'unbind()'>解绑</button>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+
+<script>
+    //传入一个函数
+    // Vue.directive('cui', function(el, binding, vnode){
+    //     //console.log(el)//绑定了自定义指令‘cui’的节点
+    //     //console.log(binding)//是一个对象，包含指令的很多信息。
+    //     //console.log(vnode)//编译生成的虚拟节点
+    //     el.style.color = binding.value;
+    // })
+
+    //传入一个对象，分别是五个生命周期的钩子函数
+    Vue.directive('cui', {
+        bind: function () {
+            console.log('第一次被绑定')
+
+        },
+        inserted: function(){
+            console.log('被绑定元素插入到父节点')
+        },
+        update: function(){
+            console.log('组件更新')
+        },
+        componentUpdated: function(){
+            console.log('组件更新完成')
+        },
+        unbind: function(){
+            console.log('组件解绑')
+        }
+    })
+
+    function unbind(){
+        app.$destroy()
+    }
+
+    var app = new Vue({
+        el: "#app",
+         data: {
+             num: 10,
+             color: 'red'
+         },
+         methods: {
+             add(){
+                 this.num++
+                //  this.color = "green"
+             }
+         }
+    })
+</script>
+

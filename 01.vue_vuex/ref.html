@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ref给元素或者子组件注册引用信息，如果是DOM元素，则获取到的就是该DOM元素，如果是子组件，则获取到的是子组件实例  -->
+    <div id="app">
+        <p ref="text">这是一个p标签</p>
+        <nav-bar ref="child"></nav-bar>
+        <button @click = 'btn'>点击</button>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    var navBar = {
+        template: `<div>
+                    <span>这是span
+                    <p>这是p</p>
+                    这是子组件</div>
+                    `
+    }
+    new Vue({
+        el: "#app",
+        methods: {
+            btn(){
+                let text = this.$refs.text;
+                console.log(text);
+                console.log(this.$refs.child)
+            }
+        },
+        components: {
+            navBar
+        }
+        
+    })
+</script>

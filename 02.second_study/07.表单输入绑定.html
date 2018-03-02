@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <h1>复选按钮</h1>
+
+            <label>
+                <span>西瓜</span>
+                <input type="checkbox" value="xigua" v-model="fruit">
+            </label>
+            <label>
+                <span>香蕉</span>
+                <input type="checkbox" value="xiangjiao" v-model="fruit">
+            </label>
+            <label>
+                <span>草莓</span>
+                <input type="checkbox" value="caomei" v-model="fruit">
+            </label>
+            <label>
+                <span>橘子</span>
+                <input type="checkbox" value="juzi" v-model="fruit">
+            </label>
+        </div>
+        <div>
+            <h1>单选按钮</h1>
+            <label>
+                <span>男</span>
+                <input type="radio" value="man" v-model="sex">
+            </label>
+            <label>
+                <span>女</span>
+                <input type="radio" value="male" v-model="sex">
+            </label>
+        </div>
+        <div>
+            <!-- 选中以后，如果有option有value属性，则city的值为value的值，否则为option的文本 -->
+            <h1>选择框</h1>
+            <select name="city" v-model="city">
+                <option value="">请选择</option>
+                <option value="001">北京</option>
+                <option value="002">上海</option>
+                <option value="003">广州</option>
+                <option value="004">天津</option>
+                <option value="005">重庆</option>
+            </select>
+        </div>
+
+        <div>
+            <!-- 选中以后，如果有option有value属性，则city的值为value的值，否则为option的文本 -->
+            <h1>多选时绑定到一个数组</h1>
+            <select multiple name="citys" v-model="citys">
+                <option value="">请选择</option>
+                <option value="001">北京</option>
+                <option value="002">上海</option>
+                <option value="003">广州</option>
+                <option value="004">天津</option>
+                <option value="005">重庆</option>
+            </select>
+        </div>
+        <div>
+            <h1>使用v-for渲染选项</h1>
+            <select name="skill" v-model="skill">
+                <option value="">请选择</option>
+                <option v-for="(item, index) in skills" :key="index" value="item.value">{{item.text}}</option>
+            </select>
+        </div>
+        <div>
+            <h1>值绑定</h1>
+            <!-- 选中的时候值为yes，反之 为no -->
+            上海<input type="checkbox" v-model="toggle" true-value="yes" false-value="no">
+            <br>
+            
+        </div>
+        <div>
+            <h1>修饰符</h1>
+            <!-- 默认情况下 v-model 在每次input事件触发后将输入框的值与数据进行同步，如果添加lazy修饰符，则转变为使用change事件进行同步 -->
+            <input type="text" v-model.lazy="mess">
+            <h2>{{mess}}</h2>
+            <h2>转换成number</h2>
+            <input type="text" v-model.number="age">
+            <h2>过滤首尾空白符</h2>
+            <input type="text" v-model.trim="name">
+        </div>
+        <button @click='sumbit'>提交</button>
+    </div>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            fruit: ['juzi'],
+            sex: 'man',
+            city: '',
+            citys: [],
+            skills: [
+                {text: '打篮球', value: '001'},
+                {text: '打羽毛球', value: '002'},
+                {text: '打乒乓球', value: '003'},
+                {text: '打网球', value: '004'},
+            ],
+            skill: '',
+            toggle: 'yes',
+            mess: "Hello",
+            age: 12,
+            name: ''
+        },
+        methods: {
+            sumbit() {
+                // delete this.$data.skills
+                console.log(this.$data);
+            },
+            handle(e) {
+                // console.log(2323)
+                // this.mess = e.target.value;
+            }
+        }
+    })
+</script>

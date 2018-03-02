@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .isOk {
+            color: orange;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>用户注册</h2>
+        <div>
+            <label for="username">用户名：</label>
+            <input type="text" v-model.lazy="userName" id="username" @change="change">
+            <span v-if="isOK" class="isOk">可注册</span>
+        </div>
+        <div>
+            <label for="password">密码:</label>
+            <input type="password" v-model="password" id="password">
+        </div>
+
+        <div>
+            <label for="age">年龄:</label>
+            <input type="number" id="age" v-model="age">
+        </div>
+
+        <div>
+            <label for="male">男:</label>
+            <input type="radio" id="male" value="男" v-model="sex">
+            <label for="female">女:</label>
+            <input type="radio" id="female" value="女" v-model="sex">
+        </div>
+        <div>
+            <label for="content">个人简介:</label>
+            <br>
+            <textarea rows="10" cols="30" v-model="content" id="content"></textarea>
+        </div>
+
+        <hr>
+        <div>
+            <h2>您输入的信息是</h2>
+
+            <div class="dv">用户名： {{ userName }}</div>
+            <div class="dv">密 码： {{ password }}</div>
+            <div class="dv">年龄： {{ age }}</div>
+            <div class="dv">性别： {{ sex }}</div>
+            <div class="dv">个人简介： {{ content }}</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            userName: "",
+            password: "",
+            age: "",
+            sex: "",
+            content: "",
+            isOK: false
+
+        },
+        methods: {
+            change() {
+                if (this.userName.length > 0)this.isOK = true;
+                else this.isOk = false;
+                }
+            },
+        watch: {
+            age(newVal, oldVal){
+                console.log(typeof newVal)
+            }
+        }
+        
+    })
+
+</script>

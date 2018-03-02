@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .color {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+        .green {
+            color: green;
+        }
+        .font {
+            font-size: 20px;
+        }
+        .border {
+            border: 1px solid #ccc;
+            transform: rotate(90deg)
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="font" v-bind:class="{color: isColor}">Hello Vue</div>
+        <div :class="classObj">hello world</div>
+        <div :class="computedClass">样式绑定在计算属性中</div>
+        <div :class="['font', blue ? 'blue' : 'green']">把数组传递给class</div>
+
+        <div :style="{color: red}">对象样式语法</div>
+
+        <div :style="{transform}">自动添加前缀</div>
+
+        <tab-bar :class="{color: isColor}"/>
+
+        <button @click="changeColor">变色</button>
+
+    </div>
+</body>
+</html>
+<script>
+
+    Vue.component('tab-bar', {
+        template: '<div><span class="font">组件样式</span></div>'
+    })
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isColor: true,
+            classObj: {
+                color: true,
+                border: true
+            },
+            isShow: false,
+            
+            color: 'color',
+            blue: true,
+            red: 'red',
+            transform: 'translateX(200px)'
+            
+
+        },
+        computed: {
+            computedClass() {
+                return {
+                    font: !this.isShow,
+                    border: false
+                }
+            }
+        },
+        methods: {
+            changeColor() {
+                this.blue = false
+            }
+        }
+    })
+
+
+</script>

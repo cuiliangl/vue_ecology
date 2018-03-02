@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--<div>{{ num }}</div>-->
+        <ul>
+            <li v-for = "star in stars">{{ star }}</li>
+        </ul>
+        <button @click = 'add()'>add</button>
+        <!--<button onclick="add()">add1</button>-->
+    </div>
+   
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+
+    //引用构造器外部数据
+    var datas = {
+        // num: 10,
+        stars: ['柳岩', '刘亦菲', '刘诗诗']
+    }
+
+    //三种方式改变num的值
+    function add() {
+        //1、 直接操作外部数据
+        datas.num ++ 
+
+        //2、 用Vue对象的方式添加
+        //app.num ++ 
+
+        //3、 用Vue.set的方式改变
+        //Vue.set(datas, 'num', 20)
+
+        //改变数组中的元素
+        // Vue.set(app.stars, 1, '高圆圆')
+        // console.log(app.stars)
+    }
+    var app = new Vue({
+        el: "#app",
+        data: datas,
+        methods: {
+            add(){
+                // this.stars[1] = '高圆圆'
+                // console.log(this.stars)
+                Vue.set(app.stars, 1, "高圆圆")
+            }
+        }
+
+    })
+</script>

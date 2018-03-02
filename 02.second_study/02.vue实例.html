@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{name}}</h2>
+
+        <h3 v-once>{{mess}}</h3>
+
+        <div v-html="html"></div>
+
+        <h4>{{isShow? '萨瓦迪卡': '库底伊娃'}}</h4>
+
+        <h5 :id="'name:'+ name">{{str + (new Date())}}</h5>
+
+        <div>
+            <h1 v-if="list.length > 5">this is h1</h1>
+            <h2 v-else-if="list.length > 3">this is h2</h2>
+            <h3 v-else-if="list.length > 2">this is h3</h3>
+            <h4 v-else>this is h4</h4>
+        </div>
+
+        <!-- 修饰符 -->
+        <!-- 阻止默认表单默认提交 -->
+        <form @submit.prevent="handle">
+            <input type="text">
+        </form>
+
+        <!-- 阻止a标签的默认跳转 -->
+        <a href="https://www.baidu.com" @click.prevent="handleBai">百度</a>
+
+        <button :disabled="isDisabled">禁掉</button>
+        <button @click="change">改变</button>
+    </div>
+
+</body>
+</html>
+<script>
+
+    let obj = {
+        name: 'Jack'
+    }
+
+    // 冻结obj 不可更改
+    // Object.freeze(obj)
+
+    var app = new Vue({
+        el: "#app",
+        // data: obj,
+        data: {
+            name: 'jack',
+            mess: 'this is once',
+            html: '<h3>this is v-html</h3>',
+            isDisabled: false,
+            isShow: true,
+            str: '时间是： ',
+            list: [1,2,3]
+        },
+        methods: {
+            change() {
+                let vm = this;
+                vm.name = 'Rose';
+                vm.mess = 'this is once, not change'
+            },
+            handle() {
+                
+            },
+            handleBai(e) {
+                console.log(e.target.href);
+            }
+        },
+        beforeCreate() {
+            console.log('beforeCreate');
+        },
+        created() {
+            console.log('create');
+        },
+        beforeMount() {
+            console.log('beforeMounted')
+        },
+        mounted: function() {
+            console.log('mount')
+        },
+        beforeUpdate() {
+            console.log('beforeUpdata')
+        },
+        updated() {
+            console.log('updata')
+        }
+    })
+
+    // console.log(app.$data === obj); // true
+    // console.log(app.$el === document.getElementById('app')); // true
+
+</script>

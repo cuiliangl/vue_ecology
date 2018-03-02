@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <video-item v-for="video in videos" v-bind:item="video"></video-item>
+        </ol>
+        <hr> 过滤器
+        <br>
+        <div>
+            {{ date | geShiHua }}
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    Vue.component('video-item', {
+        props: ['item'],
+        template: "<li>{{ item.name }}</li>"
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            videos: [
+                { name: '人名的名义' },
+                { name: '白鹿原' },
+                { name: '欢乐颂' }
+            ],
+            date: 333.3
+        },
+        filters: {//过滤器
+            geShiHua: function (value) {
+                console.log(value)
+                return value * 10;
+            }
+        }
+    })
+
+</script>

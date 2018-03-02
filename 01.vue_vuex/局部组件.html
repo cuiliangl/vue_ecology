@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        
+        <nav-bar></nav-bar>
+        <!--或者-->
+        <!--<div is="nav-bar"></div>-->
+        <!--或者-->
+        <!--<div is="navBar"></div>-->
+        
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    
+    var navBar = {
+        
+        template: "<div> 底部导航组件</div>"
+        
+    }
+
+    new Vue ({
+        el:"#app",
+    
+        
+        //注册组件
+        components: {
+            // 'nav-bar': navBar 或者可以省略
+            navBar//但是自定标签中驼峰命名法中间必须要用‘-’分割
+        }
+    })
+
+</script>

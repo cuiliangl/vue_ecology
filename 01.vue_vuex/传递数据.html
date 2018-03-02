@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>考试成绩</h1>
+        <nav-bar :score="50"></nav-bar>
+        <nav-bar :score="65"></nav-bar>
+        <nav-bar :score="73"></nav-bar>
+        <nav-bar :score="86"></nav-bar>
+        <nav-bar :score="93"></nav-bar>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+
+
+    // 在项目开发中这是一个单独的.vue文件--组件
+    //父组件通过绑定一个属性，向子组件传递数据，在子组件中通过props接受数据，而且属性成为子组件所在实例的一个属性，在实例中可以通过this.属性名访问。
+    
+    Vue.component('nav-bar', {
+        props:['score'],
+        template: "<div>考试得分是：{{ score }}，等级是：{{ comment }}</div>",
+        computed: {
+            comment(){
+
+                var result= ''
+
+                if(this.score>90){
+                    result ='成绩良好'
+                } else if(this.score>80){
+                    result = '成绩较好'
+                } else if(this.score>70){
+                    result = '成绩中等'
+                } else if(this.score>60){
+                    result = '成绩偏下'
+                } else {
+                    result = '成绩较差'
+                }
+                 return result
+            }
+        }
+        
+    })
+
+    new Vue({
+        el: "#app"
+    })
+</script>

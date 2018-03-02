@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="myApp">
+        <h1>人生加法</h1>
+        <!-- html和emit中如果要使用下划线，必须全部使用  -->
+        <add-method :a="6" :b="12" v-on:add_event="getAddResult"></add-method>
+        <hr/>
+        <h3>{{result}}</h3>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    Vue.component('add-method', {
+        props: ['a', 'b'],
+        template: '<div><button v-on:click="add">加吧</button></div>',
+        methods: {
+            add: function(){
+                var value = 0;
+                value = this.a + this.b;
+                this.$emit('add_event', {
+                    result:value
+                });
+            }
+        },
+    });
+    var myApp = new Vue({
+        el: '#myApp', 
+        data: {
+            result: 0
+        },
+        methods: {
+            getAddResult: function(pval){
+                this.result = pval.result;
+            }
+        },
+    });
+</script>

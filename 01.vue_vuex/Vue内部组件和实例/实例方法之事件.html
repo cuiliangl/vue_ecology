@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{ num }}</h2>
+        <button @click= 'add'>add</button>
+    </div>
+    <button onclick="reduce()">reduce</button>
+    <button onclick="once()">once</button>
+    <button onclick="off()">off</button>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            num:10
+        },
+        methods: {
+            add(){
+                this.num++
+            }
+        }
+    })
+
+    function reduce(){
+        vm.$emit('reduce')   
+    }
+
+    //一直监听自定义事件
+    vm.$on('reduce', function(val){
+        vm.num --
+    })
+
+    //只监听一次，执行一次
+    function once(){
+        vm.$emit('once')
+    }
+    vm.$once('once', function(){
+        vm.num --
+    })
+
+
+    //移除事件监听器。（也就是移除$on监听的事件）
+    function off(){
+        //不加参数，全部移除
+        // vm.$off()
+
+        //参数只提供了事件，则移除该事件所有的监听器；
+        vm.$off('reduce')
+    }
+
+    
+    
+</script>

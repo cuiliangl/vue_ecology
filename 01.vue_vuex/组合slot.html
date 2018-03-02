@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+
+
+
+        <stars :title="title">
+
+            光线传媒：<div slot="liuyan">柳岩</div>
+            华谊兄弟：<div slot="liuyifei">刘亦菲</div>
+            长城：<div slot="liyin">赵丽颖</div>
+
+        </stars>
+        
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+
+    Vue.component('stars', {
+        props: ['title'],
+        template: "<div>"+
+                    "<div>{{ title }}</div>"+
+                    "<slot name='liuyan'></slot>"+
+                    "<slot name='liuyifei'></slot>"+
+                    "<slot name='liyin'></slot>"+
+                  "</div>"
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            title: "美女明星"
+        }
+
+    })
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+
+        <to-do></to-do>
+        <item-todo></item-todo>
+
+        
+    </div>
+
+</body>
+</html>
+<script>
+
+    // 非父子组件之间的传值 通过创建空的vue实例作为事件总线
+    // 创建空的vue实例，作为事件总线
+    let vue = new Vue();
+
+    // 子组件 to-do
+    Vue.component('to-do', {
+        template: `
+            <div>
+                {{num}}  
+                <button @click="handle">click</button>  
+            </div>
+        `,
+        data() {
+            return {
+                num: 10
+            }
+        },
+        
+        methods: {
+            handle() {
+                console.log(this.num)
+                this.num += 1
+                // 通过事件总线的 $emit方法发射事件 并传递值
+                vue.$emit('addhandle', this.num);
+            }
+        }
+    })
+
+    // 子组件 item-todo
+    Vue.component('item-todo', {
+        template: `
+            <div>
+                {{count}}    
+            </div>
+        `,
+        data() {
+            return {
+                count: 0
+            }
+        },
+        created() {
+            let _this = this;
+            // 在created生命周期中 通过vue.$on方法接收，参数一：事件名 参数二： 回调事件，参数为组件传递过来的值
+            vue.$on('addhandle', function(val) {
+                // console.log(val)
+                _this.count = val
+            })
+        }
+    })
+
+
+
+    new Vue({
+        el: "#app",
+        data: {
+            
+        }
+    })
+
+
+</script>

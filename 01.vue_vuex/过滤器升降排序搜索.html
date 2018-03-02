@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-clock] {
+            display: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .inp {
+            width: 400px;
+            margin: 50px auto 20px;
+        }
+
+        .inp input {
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table td,
+        th {
+            width: 100px;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+
+            margin: 20px auto;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+            margin: 10px 40px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-clock>
+
+        <div class="inp">
+            搜索：<input placeholder="请输入id或姓名" v-model='inputs'>
+            <button>年龄由大到小</button>
+            <button>年龄由小到大</button>
+        </div>
+        <h1>数据列表</h1>
+        <div class="datas">
+            <table>
+                <thead>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                </thead>
+                <tbody>
+                    <tr v-for="item in lists  ">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.sex }}</td>
+                        <td>{{ item.age }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            inputs: '',
+            lists: [
+                { id: 001, name: 'jack', sex: "男", age: 14 },
+                { id: 002, name: 'rose', sex: "男", age: 11 },
+                { id: 003, name: 'mike', sex: "男", age: 24 },
+                { id: 004, name: 'tom', sex: "男", age: 12 },
+                { id: 005, name: 'bob', sex: "男", age: 45 },
+                { id: 006, name: '刘亦菲', sex: "男", age: 30 },
+                { id: 007, name: '周星驰', sex: "男", age: 50 },
+                { id: 008, name: '马云', sex: "男", age: 30 },
+                { id: 009, name: '郭广昌', sex: "男", age: 22 },
+                { id: 0010, name: '史玉柱', sex: "男", age: 32 },
+                { id: 0011, name: '马化腾', sex: "男", age: 44 },
+                { id: 0012, name: '刘强东', sex: "男", age: 54 },
+                { id: 0013, name: '王健林', sex: "男", age: 60 },
+                { id: 0014, name: '李彦宏', sex: "男", age: 33 }
+            ]
+        } 
+    })
+     
+</script>

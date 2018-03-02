@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     select{
+        width: 200px;
+        
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>城市</h2>
+        <select v-model= "city">
+            <option value="上海">上海</option>
+            <option value="北京">北京</option>
+            <option value="深圳">深圳</option>
+            <option value="重庆">重庆</option>
+            <option value="沈阳">沈阳</option>
+        </select>
+
+        所在的城市是：{{ city }}
+
+        <h2>喜欢的明星</h2>
+        <select v-model="stars" multiple>
+            <option value="刘亦菲">刘亦菲</option>
+            <option value="唐嫣">唐嫣</option>
+            <option value="贾静雯">贾静雯</option>
+            <option value="张柏芝">张柏芝</option>
+            <option value="邓紫棋">邓紫棋</option>
+            <option value="赵丽颖">赵丽颖</option>
+            <option value="杨幂">杨幂</option>
+            <option value="秦海璐">秦海璐</option>
+            <option value="赵灵儿">赵灵儿</option>
+        </select>
+
+        <br>
+        喜欢的女星是：
+        
+         <div v-for=" star in stars">{{ star }}</div>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            city: '上海',
+            stars: []
+        }
+    })
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{ num }}</div>
+        <button @click = "add">add</button>
+        <button onclick="app.$destroy()">销毁</button>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            num : 10
+        },
+        methods: {
+            add(){
+                this.num ++
+            }
+        },
+        // 实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用
+        beforeCreate:function(){
+            console.log('1-beforeCreate 实例初始化之后');
+        },
+        created:function(){
+            console.log('2-created 创建完成');
+        },
+        beforeMount:function(){
+            console.log('3-beforeMount 挂载之前');
+        },
+        mounted:function(){
+            console.log('4-mounted 被创建');
+        },
+        beforeUpdate:function(){
+            console.log('5-beforeUpdate 数据更新前');
+        },
+        updated:function(){
+            console.log('6-updated 被更新后');
+        },
+        activated:function(){
+            console.log('7-activated');
+        },
+        deactivated:function(){
+            console.log('8-deactivated');
+        },
+        beforeDestroy:function(){
+            console.log('9-beforeDestroy 销毁之前');
+        },
+        destroyed:function(){
+            console.log('10-destroyed 销毁之后')
+        }
+ 
+    })
+</script>

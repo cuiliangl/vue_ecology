@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        
+        
+    </div>
+    <!--<button onclick="destroy()">销毁</button>
+    <button onclick="reload()">刷新</button>-->
+    
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.min.js"></script>
+
+<script>
+    
+
+    //扩张一个全局的组件
+    var navBar = Vue.extend({
+        template: `<div>
+                        <div>{{ title }}</div>
+                        <h2>{{ num }}</h2>
+                        <button @click = 'add'>add</button>
+                    </div>`,
+        data(){
+            return {
+                title: 'Vue 全局扩展组件',
+                num: 10
+            }
+        },
+        mounted(){
+            // console.log('挂载上了')
+        },
+        destroyed(){
+            console.log('销毁了')
+        },
+        methods: {
+            add(){
+                //更改数据
+                this.num++
+                console.log(this.num)
+                this.$nextTick(function(){
+                    console.log('DOM现在更新了')
+                })
+            }
+        },
+        updated(){
+            // console.log('数据重新渲染了')
+            console.log('数据更新成：'+this.num)
+        }
+    })
+
+    //一、挂载
+
+    //使用全局扩张的组件，挂载到id为#app的元素上
+    // var vm = new navBar().$mount('#app');
+
+    //或者
+    var vm = new navBar({el: "#app"})
+
+    //或者
+    // 如果没有提供 elementOrSelector 参数，模板将被渲染为文档之外的的元素，并且你必须使用原生DOM API把它插入文档中
+    // var navbar = new navBar().$mount()
+    // document.getElementById('app').appendChild(navbar.$el)
+
+    //二、销毁
+    function destroy(){
+        //点击按钮，销毁vm实例，控制台会输出‘销毁了’，当再次点击的时候不会输出，而且点击add按钮，数量也不会改变，说明已经销毁了
+        vm.$destroy()
+    }
+
+    //三、更新数据方法
+    function reload(){
+        vm.$forceUpdate()
+    }
+</script>

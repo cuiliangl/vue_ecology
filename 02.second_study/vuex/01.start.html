@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>count的值是：{{num}}</h1>
+        <h1>count的值是：{{getCount}}</h1>
+        <button @click="addNum">Add</button>
+        <hr>
+        <button @click="addValue">向state设新值</button>
+        <br>
+        <button @click="getContext">打印context</button>
+        <hr>
+        <child/>
+
+        
+    </div>
+</body>
+
+</html>
+<script>
+    var store = new Vuex.Store({
+        state: {
+            count: 1
+        },
+        mutations: {
+            // mutations接收第二个参数作为载荷，大多数情况下payload应该定义成一个对象
+            // add(state, payload) {
+            //     state.count += payload
+            // }
+
+            // 以对象风格提交过来的
+            add(state, payload) {
+                state.count += payload.num
+            }
+        },
+        getters: {
+            getCount(state) {
+                return state.count + 4
+            },
+            getNumAddCount(state, getters) {
+                return state.count + getters.getCount
+            }
+        },
+        actions: {
+            addActions(context) {
+                console.log(context);
+                // context.commit('add', {num: 12})
+                // 或者使用对象风格的方式
+                context.commit({
+                    type: 'add',
+                    num: 12
+                })
+            }
+        }
+    })
+
+    // 创建子组件
+    Vue.component('child', {
+        template: `
+            <div>
+                child组件中的值： {{num}}
+                <h3>这个值是getter中获取的：{{getCount}}</h3>
+                <h3>这个值是getters和state中组合的：{{getNumAddCount}}</h3>  
+                <button @click="childAdd">child-add</button>
+            </div>
+        `,
+        store,
+        computed: {
+            num() {
+                return store.state.count
+            },
+            getCount() {
+                return store.getters.getCount
+            },
+            getNumAddCount() {
+                return store.getters.getNumAddCount
+            }
+        },
+        methods: {
+            childAdd() {
+                // store.commit('add', 3)
+                // 对象风格的提交方式
+                store.commit({
+                    type: 'add',
+                    num: 3
+                })
+            }
+        }
+    })
+
+
+    // store中的状态是响应式的，获取store中的状态在computed计算属性中返回即可。
+    // commit 在触发methods中的方法中提交
+    new Vue({
+        el: "#app",
+        store,
+        computed: {
+            num() {
+                return store.state.count
+            },
+            getCount() {
+                return store.getters.getCount
+            }
+        },
+        methods: {
+            addNum() {
+                // console.log(store)
+                // store.commit('add')
+
+                // 对象风格的提交方式
+                store.commit({
+                    type: 'add',
+                    num: 3
+                })
+            },
+            addValue() {
+                // 向state中添加新的属性值 **最好是提前设置好所有所需属性的初始值
+                // 方式一、
+                // Vue.set(store.state, 'city', 'shanghai')
+            },
+            getContext () {
+                store.dispatch('addActions')
+            }
+        }
+    })
+
+    // console.log(store)
+
+    // console.log(store.state.count); // 1
+
+    // store.commit('add')
+
+    // console.log(store.state.count) // 2
+
+
+
+</script>

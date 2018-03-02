@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>苹果手机的价格是：{{ price }}，含税总共： {{ priceIndex }}，折合人民币是：{{ priceRMB }}</div>
+        <button @click="btn(1000)">改变价格</button>
+    </div>
+</body>
+<script src="./static/vue.min.js"></script>
+<script>
+    var App = new Vue({
+        el: "#app",
+        data: {
+            price: 0,
+            priceIndex: 0,
+            priceRMB: 0
+        },
+        watch: {
+            price: function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+                this.priceIndex = Math.round(this.price * 1.04);
+                this.priceRMB = Math.round(this.price / 12);
+
+            }
+        },
+        methods: {
+            btn(value) {
+                this.price += value;
+            }
+        }
+    })
+    App.price = 30920;
+
+</script>
+
+</html>

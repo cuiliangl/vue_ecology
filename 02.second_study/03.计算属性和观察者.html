@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h3>现在时间是： {{message}}</h3>
+        <h4>{{str}}</h4>
+        <h2>{{'在插值中调用方法：' + computedHandle()}}</h2>
+        <h4>fullName is: {{fullNames}}</h4>
+        <h3>computed属性的getter和setter: {{allDatas}}</h3>
+        <button @click="getHandle">获取fullName</button>
+    </div>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            name: "计算属性和观察者模式",
+            mess: new Date(),
+            lists: ['this', 'is', 'mike'],
+            firstName: 'cui',
+            lastName: 'liang'
+        },
+        
+        // 计算属性
+        computed: {
+            message: function () {
+                // console.log(this)
+                return this.mess.toTimeString().slice(0, 8)
+            },
+
+            // 不能用箭头函数
+            str() {
+                // console.log(this)
+                return this.lists.join(' ');
+            },
+            fullNames() {
+                return this.firstName + this.lastName
+            },
+            allDatas: {
+                // getters
+                get() {
+                    return this.lists.join(' | ')
+                },
+                // setter 当改变了allDatas值的时候，会执行set，然后执行get
+                set(newData) {
+                    console.log(newData)
+                    this.lists.splice(1,1);
+                }
+            }
+        },
+        methods: {
+            computedHandle() {
+                return this.mess.toTimeString();
+            },
+            getHandle() {
+                // this.firstName = 'Cui'
+                // this.lastName = "Liang"
+                this.allDatas = 'oops'
+            }
+        },
+        // watch: {
+        //     firstName(cur, old) {
+        //         this.fullName = cur + this.lastName
+        //     },
+        //     lastName(cur, old) {
+        //         this.fullName = this.firstName + cur
+        //     }
+        // }
+
+    })
+</script>

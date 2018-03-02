@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表行组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <table width="300" border="1" style='text-align:center'>
+            <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        名称
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<row1></row1>
+                <row2></row2>
+                <row3></row3>-->
+
+                <tr is="row1"></tr>
+                <tr is="row2"></tr>
+                <tr is="row3"></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    Vue.component('row1', {
+        template: "<tr><td>1</td><td>百度金融事业</td></tr>"
+    })
+    Vue.component('row2', {
+        template: "<tr><td>2</td><td>百度无人驾驶</td></tr>"
+    })
+    Vue.component('row3', {
+        template: "<tr><td>3</td><td>百度AI产业</td></tr>"
+    })
+
+    new Vue({
+        el: "#app",
+
+    })
+
+</script>

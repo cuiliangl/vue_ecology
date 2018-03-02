@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        插值表达式
+        <div>{{ mes }}</div>
+        <hr> for循环
+        <div>
+            <ul>
+                <li v-for="item in list">
+                    {{ item.name }} &nbsp; {{item.age}}
+                </li>
+            </ul>
+        </div>
+
+        <hr> v-if
+        <div v-if="isExist == 'cui'">高考 金榜题名</div>
+        <div v-else>现实么</div>
+
+        <hr> 双向绑定
+        <br>
+        <input type="text" v-model="message">
+        <div>{{ message }}</div>
+
+        <hr>
+        <div>{{ ischange }}</div>
+
+        <hr>
+        <button @click="btn">按钮</button>
+    </div>
+</body>
+
+</html>
+
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            mes: 'Hello Vue.js',
+
+            list: [
+                { name: 'jack', age: 12 },
+                { name: 'rose', age: 13 },
+                { name: 'tom', age: 34 }
+            ],
+
+            isExist: 'cui',
+            message: 'liang',
+            ischange: '还没变呢'
+        },
+        watch: {
+            // message:function(newVal, oldVal){
+            //     console.log('这是新值',newVal);
+            //     console.log('这是旧值', oldVal);
+            //     this.ischange = newVal;
+
+            // }
+            //或者
+            message(newVal, oldVal) {
+                console.log('这是新值', newVal);
+                console.log('这是旧值', oldVal);
+                this.ischange = newVal;
+
+            }
+
+        },
+        methods: {
+            // btn: function(){
+            //     console.log('点击了')
+            // }
+            //或者
+            btn() {
+                console.log('点击了')
+            }
+        }
+    })
+
+</script>

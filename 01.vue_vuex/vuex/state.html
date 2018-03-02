@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        视图子组件
+        <div>
+            <counter></counter>
+        </div>
+
+        <hr>
+        按钮子组件
+        <div>
+            <btn></btn>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules /vue/dist/vue.min.js"></script>
+<script src="../node_modules /vuex/dist/vuex.min.js"></script>
+<script>
+    //store
+    const store = new Vuex.Store({
+        state: {
+            vuex_count: 3
+        },
+        mutations: {
+            vuex_sum(state) {
+                state.vuex_count++;
+            },
+            vuex_sub(state) {
+                state.vuex_count--;
+            }
+        }
+    })
+
+    //视图子组件
+    Vue.component('counter', {
+        template: '<div>{{ viewCount }}</div>',
+        computed: {
+            viewCount() {
+                return this.$store.state.vuex_count;
+            }
+        }
+    })
+
+    //按钮组件
+    Vue.component('btn', {
+        template: "<div><button @click = 'sum'>+</button> <span>{{ btnCount }}</span> <button @click = 'sub'>-</button></div>",
+        computed: {
+            btnCount(){
+                return this.$store.state.vuex_count;
+            }
+        },
+        methods: {
+            sum() {
+                this.$store.commit('vuex_sum')
+            },
+            sub() {
+                this.$store.commit('vuex_sub')
+            }
+        }
+    })
+
+    //vue实例
+    new Vue({
+        el: '#app',
+        //store: store, 同下
+        store
+    })
+
+</script>

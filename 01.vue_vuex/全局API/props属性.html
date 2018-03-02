@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <nav-bar my-address="Chinas"></nav-bar>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    
+    //定义组件
+    var navBar = {
+        template: "<div>我来自{{ address }}</div>",
+        //接受父组件传递过来的值
+        props: ['myAddress'],
+        data: {
+            address: ''
+        },
+        computed: {
+            address(){
+                return this.address = this.myAddress 
+            }
+        }
+    }
+
+    new Vue({
+        el: "#app",
+        data: {
+            title: '父组件向子组件传值'
+        },
+        components: {
+            navBar
+        }
+    })
+
+
+</script>

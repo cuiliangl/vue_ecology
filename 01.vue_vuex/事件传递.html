@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--父组件将值传递给子组件，子组件计算好之后再传递给父组件-->
+        <!-- html中绑定的属性要用短线（-）连接，js中用小驼峰命名法 -->
+        <num-add :a-c="3" :b="5" v-on:getAdd="getResult"></num-add>
+        <!-- 这里小写或者小驼峰  -->
+        <hr>
+        <div>结果是：{{ result }}</div>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    Vue.component('num-add', {
+        props: ['aC', 'b'],
+        template: "<div><button @click = 'add'>加</button></div>",
+        methods: {
+            add: function(){
+
+                var value = this.aC + this.b
+                console.log(value)
+
+                // 这里事件名要小写
+                this.$emit('getadd', value);
+
+            }
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            result: 0
+        },
+        methods: {
+            getResult: function (pval) {
+                this.result = pval;
+            }
+        }
+
+    })
+
+</script>

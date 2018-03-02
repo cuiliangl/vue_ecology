@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        
+        <h2>{{ mess }}</h2>
+        <div id="dv"></div>
+        <button @click= "add">add</button>
+    </div>
+</body>
+</html>
+<script src="../static/jquery.min.js"></script>
+<script src="../static/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            mess: '实例入门'
+        },
+        //在构造器内部使用jquery（其他js框架）
+        mounted: function(){
+            $('#dv').html('Hello, jQuery')
+        },
+        methods: {
+            add(){
+                console.log("调用了构造器内部的方法")
+            }
+        }
+
+    })
+    //在外部调用构造器内部的方法
+    app.add()
+    console.log(app)
+</script>

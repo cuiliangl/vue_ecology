@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h2>今日温度：{{ num }} ℃</h2>
+        <button @click = "add">温度调节</button>
+        
+        <div>穿衣指数：{{ content }}</div>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    
+    new Vue({
+        el:"#app",
+        data: {
+            num: 0,
+            content: '羽绒服'
+        },
+        methods: {
+            add(){
+                this.num += 5
+            }
+        },
+        watch: {
+            num(newVal, oldVal){
+                if(newVal >= 30){
+                    this.content = '短袖'
+                } else if(newVal >= 25){
+                    this.content = 'T恤'
+                } else if(newVal >= 15){
+                    this.content = '夹克'
+                }else if(newVal >= 0){
+                    this.content = '保暖'
+                }  else {
+                    this.content = '羽绒服'
+                }
+            }
+        }
+    })
+</script>

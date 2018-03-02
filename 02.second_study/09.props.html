@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        
+        <todo :num="20" :arr="arr"></todo>
+
+        <item-todo str="mike" foo="12"></item-todo>
+    </div>
+</body>
+</html>
+<script>
+
+    Vue.component('todo', {
+        props: ['num', 'arr'],
+        template: '<div>\
+                    {{counter}}\
+                    <br>\
+                    {{arrStr}}\
+                    <button @click="addHandle">clickAdd</button>\
+                </div>',
+        data() {
+            return {
+                counter: this.num
+            }
+        },
+        methods: {
+            addHandle() {
+                this.counter += 1
+            }
+
+        },
+        computed: {
+            arrStr() {
+                return this.arr.join('-')
+            }
+        }
+    })
+
+    Vue.component('item-todo', {
+        props: {
+            num: {
+                type: Number,
+                default: 12
+            },
+            str: {
+                type: String,
+                required: true
+            },
+            count: [Number, String],
+
+            // 对象或者数组的默认值应当由工厂函数返回
+            obj: {
+                type: Object,
+                default: function() {
+                    return {name: 'Mike'}
+                }
+            },
+            arr: {
+                type: Array,
+                default() {
+                    return [1,2,3]
+                }
+            },
+            
+            // 自定义验证函数
+            // 不成立时报：custom validator check failed for prop "foo".
+            foo: {
+                validator(value) {
+                    return value > 10
+                }
+            }
+        },
+        template: `<div>
+                {{num}}<br>
+                {{str}}<br>
+                {{count}}<br>
+                {{obj.name}}<br>
+                {{arr[1]}}
+                {{foo}}
+            </div>`
+    })
+
+    new Vue({
+        el: "#app", 
+        data: {
+            arr: ['jack', 12, 'beijing']
+        }
+    })
+
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <nav-bar id="nav"></nav-bar>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    //扩张构造器
+    var NavBar = Vue.extend({
+        template: "<div><ul><li><a :href = 'url'>{{msg1}}</a></li><li>{{msg2}}</li></ul></div>",
+        data(){
+            return {
+                msg1: '首页',
+                url: 'https://baidu.com',
+                msg2: '关于我'
+            }
+        }
+    })
+
+    //创建自定义构造器实例，并且挂载
+    new NavBar().$mount('#nav')
+
+</script>

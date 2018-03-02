@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" id="inp" @keyup="inputIng(event)">
+        <button id="btn" @click = "btn($event)">点击按钮</button>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        methods: {
+            inputIng(event){
+                this.diggle(event);
+                console.log(event)
+            },
+            btn(){
+                this.diggle(event);
+               console.log( event.srcElement.id )
+            },
+            diggle(event){
+                console.log(
+                    event.srcElement.tagName,
+                    event.srcElement.id,
+                    event.srcElement.innerHTML,
+                    event.key?event.key: "no"
+                )
+            }
+        }
+    })
+</script>

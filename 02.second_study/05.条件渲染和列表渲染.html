@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--  需要不同的key 因为两个模板中的input是相同的，当在第一个输入值时，切换以后值还存在-->
+        <div v-if="condition">
+            <label>userName:</label>
+            <input type="text" placeholder="username" key="user">
+        </div>
+        <div v-else>
+            <label>Email</label>
+            <input type="text" placeholder="email" key="email">
+        </div>
+
+        <button @click="toggle">切换</button>
+
+        <div>
+            <ul>
+                <li v-for="(item, index) in lists" :key="index">{{index}} - {{item}} </li>
+            </ul>
+            <ul>
+                <!-- 第一个参数为每一项，第二个参数为key，第三个参数为索引 -->
+                <li v-for="(item, key, index) in obj" :key="index">{{index}}: {{key}}: {{item}}</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li v-for="(item, index) in arr" :key="index" v-if="item%2===0">{{item}}</li>
+            </ul>
+        </div>
+
+        <button @click="changeArr">变动数组</button>
+        <button @click="changeObj">变动对象</button>
+    </div>
+    
+</body>
+</html>
+<script>
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            condition: true,
+            lists: ['北京', '上海', '天津'],
+            arr: [1,2,3,4,5,6,7,8],
+            obj: {
+                name: 'mike',
+                age: 12,
+                skill: 'song'
+            }
+        },
+        methods: {
+            toggle() {
+                this.condition = !this.condition
+            },
+            changeArr() {
+                // 这种方式不能改变数组的值
+                // this.lists[1] = '南京'
+                // 方式1
+                // Vue.set(this.lists, 1, '南京')
+                // 方式2
+                this.lists.splice(1, 1, "南京")
+            },
+            changeObj() {
+                // this.obj.address = '三里屯'
+
+                // Vue.set(this.obj, 'address', '三里屯')
+                // 或者 this.$set 是 Vue.set的别名
+                this.$set(this.obj, 'address', '三里屯')
+            }
+        }
+    })
+
+</script>

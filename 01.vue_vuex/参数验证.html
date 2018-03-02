@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--此处注意： 如果子组件中定义的参数是String类型，那么父组件传递参数时不可以在参数前面加“ ：”，因为如果加了冒号，就被认为是变量的传递，则参数name有一个属性Mike，而Mike属性是没有初始值的，所以会报错（Mike is not defined），如果不加冒号，就是值传递。-->
+        <!--如果给Mike加单引号，那么name前就必须加冒号-->
+        <user-info name="Mike" :age="23" :detial="{address: 'China', languase: 'Chinese'}"></user-info>
+    </div>
+</body>
+
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    Vue.component('user-info', {
+        props: {
+            name: {
+                String,
+                required: true
+            },
+            age: {
+                type: Number,
+                validator: function (value) {
+                    return value > 0 && value <= 100;
+                }
+            },
+            detial: {
+                type: Object,
+                default:function(){//默认值：如果父组件没有传递detial参数（是压根就没有detial参数，不是有参数而没有值），那么子组件就会采用默认的值。
+                    return {
+                        address: "USA",
+                        languase: "English"
+                    }
+                }
+            }
+        },
+        //模板中如果有多个标签，必须要有一个根元素包裹。否则只会解析第一个标签。
+        //在.vue文件的组件中亦如此。
+        template: "<div>"+
+                    "<div>姓名：{{ this.name }}</div>"+
+                    "<div>年龄：{{ this.age }}</div>"+
+                    "<div>国籍：{{ this.detial.address }}</div>"+
+                    "<div>语言：{{ this.detial.languase }}</div>"+
+                  "</div>"
+    })
+
+    new Vue({
+        el: "#app"
+        // data: {
+        //     Mike: 'tom'
+        // }
+    })
+
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{ num }}</h2>
+        <button @click = 'add'>add</button>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    Vue.mixin({
+        updated:function(){
+            console.log('这是全局混入')
+        }
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            num: 10
+        },
+        methods: {
+            add(){
+                this.num++
+            }
+        }
+    })
+
+
+    // 为自定义的选项 'myOption'  注册一个处理器
+    Vue.mixin({
+        created: function () {
+            //Vue实例有一个option属性，值是实例的选项，包括components，directive，以及自定义的选项
+            var myOption = this.$options.myOption
+            if (myOption) {
+                console.log(myOption)
+            }
+        }
+    })
+
+    //创建Vue实例，添加自定义选项‘myOption’
+    new Vue({
+        myOption: 'hello!'
+    })
+</script>

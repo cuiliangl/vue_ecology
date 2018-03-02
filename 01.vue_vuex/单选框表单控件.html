@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>性别</h2>
+        <input type="radio" id="male" value="男" v-model="sex">
+        <label for="male">男</label>
+        <input type="radio" id="female" value="女" v-model="sex">
+        <label for="female">女</label>
+
+        <h2>爱好</h2>
+        <input type="radio" id="moive" value="看电影" v-model="hobby">
+        <label for="moive">看电影</label>
+        <input type="radio" id="music" value="音乐" v-model="hobby">
+        <label for="music">音乐</label>
+
+        <h2>城市</h2>
+        <input type="radio" id="shanghai" value="上海" v-model="city">
+        <label for="shanghai">上海</label>
+        <input type="radio" id="beijing" value="北京" v-model="city">
+        <label for="beijing">北京</label>
+
+        <hr>
+        <div>性别： {{ sex }}</div>
+        <div>爱好： {{ hobby }}</div>
+        <div>城市： {{ city }}</div>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            sex: "",
+            hobby: "",
+            city: ""
+
+        }
+    })
+</script>

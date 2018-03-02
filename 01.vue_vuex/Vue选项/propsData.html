@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <nav-bar></nav-bar>
+    </div>
+</body>
+</html>
+<script src="../static/vue.min.js"></script>
+<script>
+    //扩张模板
+    var navBar = Vue.extend({
+        template: `<div>{{ title }}--传递过来的数据是：{{ num }}</div>`,
+        data(){
+            return {
+                title: "Hello Vue.js"
+            }
+        },
+        props: ['num']
+    })
+
+    new navBar({propsData:{num:10}}).$mount('nav-bar')
+
+
+
+</script>

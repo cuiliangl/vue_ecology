@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span v-bind:title="title">{{message}}</span>
+        <p :title="pTitle">this title </p>
+        <ul>
+            <li v-for="item in list">
+                {{item}}
+            </li>
+        </ul>
+        <button v-on:click="handle">点击</button>
+        <div></div>
+        <input type="text" v-model="something">
+        <p>{{something}}</p>
+
+        <ol>
+            <to-do v-for="item in datas" :name="item.name" :key="item.age"/>
+        </ol>
+
+
+
+
+    </div>
+</body>
+
+</html>
+<script>
+    // 创建注册一个组件
+    Vue.component('to-do', {
+        props: ['name'],
+        template: "<li>{{name}}</li>"
+    })
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'Hello Vue',
+            title: 'this is vue',
+            pTitle: "this is P",
+            list: ['jack', 'mike', 'tom', 'rose'],
+            something: "this is model",
+            datas: [
+                {name: 'mike', age: 12},
+                {name: 'rose', age: 11},
+                {name: 'jack', age: 10}
+            ]
+        },
+        methods: {
+            handle() {
+                console.log('hi bob')
+            }
+        }
+    })
+</script>

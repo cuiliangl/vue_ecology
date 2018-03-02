@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for= "(star, key) in stars">
+            <span>
+                {{key}}
+            </span>
+            {{star}}
+        </div>
+    </div>
+</body>
+</html>
+<script src="./static/vue.min.js"></script>
+<script>
+    new Vue ({
+        el: "#app",
+        data: {
+            stars: {
+                "姓名": "赵丽颖",
+                "年龄": 25,
+                "性别": "女",
+                "地址": "北京市"
+            }
+        }
+    })
+</script>
